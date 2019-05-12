@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.user.dao.UserMapper">
+
+    <select id="getUserInfoByAccount" resultType="com.user.model.User" parameterType="map">
+        select * from user_info
+        where user_account = #{account}
+    </select>
+
+    <select id="getUserAccountAndPassword" parameterType="map" resultType="com.user.model.User">
+        select * from user_info
+        where user_account = #{account} and user_password = #{password}
+    </select>
+
+    <insert id="addUserInfo" parameterType="com.user.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user_info
+        (user_name,user_account,user_password,user_role)
+        values
+        (#{user_name},#{user_account},#{user_password},#{user_role})
+    </insert>
+
+    <insert id="addUserXueji" parameterType="com.user.model.User">
+        insert into stu_info
+        (name,user_id)
+        values
+        (#{user_name},#{id})
+    </insert>
+
+    <select id="getUserXuejiById" parameterType="map" resultType="map">
+      select id, user_id, name, sex, date,
+      nat, idCard, sch, cen, zhu,
+      xuezhi, xueli, xingshi, fenyuan,
+      xi, cla, stuId, yudate, gadate,
+      xueji, add_time
+      from stu_info where user_id=#{id}
+    </select>
+
+
+
+</mapper>
